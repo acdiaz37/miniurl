@@ -14,6 +14,66 @@
 - [ROADMAP.md](./ROADMAP.md): fases del producto.
 - [OPERATIONS.md](./OPERATIONS.md): despliegue, dominios, monitoreo y mantenimiento.
 
+## Estado actual
+
+MiniURL ya tiene una version basica funcional del punto 2:
+
+- login de administrador
+- panel de empresas
+- creacion de empresas con subdominio
+- creacion, edicion, pausa, reactivacion y archivado de links
+- redireccion publica por subdominio y slug
+- contador basico de clics
+- prueba automatizada del flujo de redireccion
+
+La implementacion local usa SQLite para facilitar desarrollo. PostgreSQL sigue siendo la base recomendada para produccion.
+
+## Ejecutar localmente
+
+Instalar dependencias:
+
+```bash
+npm install
+```
+
+Crear la base local y datos demo:
+
+```bash
+npm run db:push
+npm run db:seed
+```
+
+Iniciar la app:
+
+```bash
+npm run dev -- --hostname 127.0.0.1
+```
+
+Panel:
+
+```text
+http://127.0.0.1:3000/login
+```
+
+Credenciales demo:
+
+```text
+admin@miniurl.local
+admin123
+```
+
+Link demo:
+
+```text
+http://demo.localhost:3000/hello
+```
+
+Prueba MVP:
+
+```bash
+npm run test:mvp
+```
+
 ## Idea
 
 Crear una plataforma de acortamiento de URLs pensada para empresas, donde cada cliente tenga su propio subdominio bajo un dominio corto común.

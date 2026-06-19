@@ -92,10 +92,21 @@ If redirects become high-traffic:
 
 Default decision for implementation:
 
-- Next.js
+- Next.js 16
 - TypeScript
 - PostgreSQL
 - Prisma
 - managed auth or Auth.js
 - Vercel-style hosting with wildcard domain support
 
+## Current Local Implementation
+
+The current basic MVP uses:
+
+- Next.js 16
+- TypeScript
+- Prisma
+- SQLite for local development
+- simple signed-cookie login for the demo admin
+
+SQLite is a development convenience. The production target remains PostgreSQL.

@@ -1,5 +1,29 @@
 # MiniURL MVP
 
+## Current Implementation Status
+
+A basic functional MVP is implemented.
+
+Covered:
+
+- admin login
+- company creation
+- subdomain assignment
+- link creation
+- link editing
+- pause, reactivate, and archive actions
+- public `302` redirects by company subdomain and slug
+- total click count
+- last clicked timestamp
+- smoke test for the redirect path
+
+Still intentionally basic:
+
+- authentication is local/demo-oriented
+- metrics are minimal
+- SQLite is used for local development
+- production DNS and HTTPS are documented but not provisioned in code
+
 ## Goal
 
 Build the first usable version of MiniURL as a multi-company URL shortener with company subdomains, a basic administration panel, and reliable redirects.
@@ -103,4 +127,3 @@ Advanced analytics are not part of the MVP.
 - Wildcard subdomain and HTTPS setup must be solved before production.
 - Basic metrics may need careful design to avoid expensive writes at high traffic.
 - The admin panel scope can grow quickly if roles, teams, and reporting are added too early.
-

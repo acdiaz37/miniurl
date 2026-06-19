@@ -26,6 +26,10 @@ Purpose:
 
 Build the first usable version.
 
+Status:
+
+Basic version implemented locally.
+
 Scope:
 
 - company creation
@@ -103,4 +107,3 @@ Potential scope:
 - billing
 - team management
 - QR codes
-

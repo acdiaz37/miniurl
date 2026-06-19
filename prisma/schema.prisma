@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Company {
+  id          String       @id @default(cuid())
+  name        String
+  subdomain   String       @unique
+  status      String       @default("active")
+  memberships Membership[]
+  links       Link[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  name         String
+  passwordHash String
+  memberships  Membership[]
+  linksCreated Link[]       @relation("LinkCreator")
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Membership {
+  id        String   @id @default(cuid())
+  companyId String
+  userId    String
+  role      String   @default("member")
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([companyId, userId])
+  @@index([userId])
+}
+
+model Link {
+  id              String       @id @default(cuid())
+  companyId       String
+  slug            String
+  destinationUrl  String
+  title           String?
+  status          String       @default("active")
+  clickCount      Int          @default(0)
+  lastClickedAt   DateTime?
+  createdByUserId String
+  company         Company      @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  createdBy       User         @relation("LinkCreator", fields: [createdByUserId], references: [id])
+  clickEvents     ClickEvent[]
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@unique([companyId, slug])
+  @@index([companyId, status])
+}
+
+model ClickEvent {
+  id        String   @id @default(cuid())
+  companyId String
+  linkId    String
+  clickedAt DateTime @default(now())
+  link      Link     @relation(fields: [linkId], references: [id], onDelete: Cascade)
+
+  @@index([companyId, clickedAt])
+  @@index([linkId, clickedAt])
+}
+
